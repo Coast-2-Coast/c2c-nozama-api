@@ -2,16 +2,23 @@
 
 const mongoose = require('mongoose')
 
+const productSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  quantity: Number,
+  image: String
+})
+
 const cartSchema = new mongoose.Schema({
-  text: {
+  userId: {
     type: String,
     required: true
   },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  cartSum: {
+    type: Number,
     required: true
-  }
+  },
+  products: [productSchema]
 }, {
   timestamps: true,
   toJSON: {
@@ -24,9 +31,9 @@ const cartSchema = new mongoose.Schema({
   }
 })
 
-cartSchema.virtual('length').get(function length () {
-  return this.text.length
-})
+// cartSchema.virtual('length').get(function length () {
+//   return this.text.length
+// })
 
 const Cart = mongoose.model('Cart', cartSchema)
 
