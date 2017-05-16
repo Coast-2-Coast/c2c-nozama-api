@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema({
     toJSON: { virtuals: true }
   })
 
-productSchema.virtual('inStock').get(function length () {
+productSchema.virtual('inStock').get(function inStock () {
   return this.inventory !== 0
 })
 
