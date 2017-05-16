@@ -2,30 +2,28 @@
 
 const mongoose = require('mongoose')
 
-const orderSchema = new mongoose.Schema({
-  text: {
-    type: String,
-    required: true
-  },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: function (doc, ret, options) {
-      const userId = (options.user && options.user._id) || false
-      ret.editable = userId && userId.equals(doc._owner)
-      return ret
-    }
-  }
+const productSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  quantity: Number,
+  image: String
 })
 
-orderSchema.virtual('length').get(function length () {
-  return this.text.length
+const orderSchema = new mongoose.Schema({
+  products: [productSchema]
+},
+  {
+    timestamp: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+  })
+
+orderSchema.virtual('totalCost').get(function getTotalCost () {
+  let totalCost = 0
+  for (let prodIndex = 0; prodIndex < this.products.length; prodIndex++) {
+    totalCost += this.products[prodIndex].quantity * this.products[prodIndex].price
+  }
+  return totalCost
 })
 
 const Order = mongoose.model('Order', orderSchema)
