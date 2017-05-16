@@ -2,29 +2,23 @@
 
 const mongoose = require('mongoose')
 
-const productSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  quantity: Number,
-  image: String
+const cartSchema = new mongoose.Schema({
+  userId: String,
+  cartSum: Number
 })
 
 const orderSchema = new mongoose.Schema({
-  products: [productSchema]
+  orderDate: {
+    type: Date,
+    required: true
+  },
+  carts: [cartSchema]
 },
   {
     timestamp: true,
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
   })
-
-orderSchema.virtual('totalCost').get(function getTotalCost () {
-  let totalCost = 0
-  for (let prodIndex = 0; prodIndex < this.products.length; prodIndex++) {
-    totalCost += this.products[prodIndex].quantity * this.products[prodIndex].price
-  }
-  return totalCost
-})
 
 const Order = mongoose.model('Order', orderSchema)
 
