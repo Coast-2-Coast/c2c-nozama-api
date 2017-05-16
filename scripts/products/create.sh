@@ -3,14 +3,21 @@
 API="http://localhost:4741"
 URL_PATH="/products"
 
+NAME="testName"
+PRICE="3"
+INVENTORY="0"
+IMAGE="imageURL"
+
 curl "${API}${URL_PATH}" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
-  --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "product": {
-      "text": "'"${TEXT}"'"
+      "name": "'"${NAME}"'",
+      "price": "'"${PRICE}"'",
+      "inventory": "'"${INVENTORY}"'",
+      "image": "'"${IMAGE}"'"
     }
   }'
 

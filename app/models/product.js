@@ -3,29 +3,30 @@
 const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
-  text: {
+  name: {
     type: String,
     required: true
   },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  price: {
+    type: Number,
     required: true
+  },
+  inventory: {
+    type: Number,
+    required: true
+  },
+  image: {
+    type: String
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: function (doc, ret, options) {
-      const userId = (options.user && options.user._id) || false
-      ret.editable = userId && userId.equals(doc._owner)
-      return ret
-    }
-  }
-})
+},
+  {
+    timestamp: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+  })
 
-productSchema.virtual('length').get(function length () {
-  return this.text.length
+productSchema.virtual('inStock').get(function length () {
+  return this.inventory !== 0
 })
 
 const Product = mongoose.model('Product', productSchema)

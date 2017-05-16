@@ -24,9 +24,10 @@ const show = (req, res) => {
 }
 
 const create = (req, res, next) => {
-  const product = Object.assign(req.body.product, {
-    _owner: req.user._id
-  })
+  console.log('req is', req.body)
+  // console.log('res is', res)
+  const product = Object.assign(req.body.product)
+  // const product = {name: 'testName', price: 13, inventory: 5, image: 'url'}
   Product.create(product)
     .then(product =>
       res.status(201)
@@ -56,8 +57,8 @@ module.exports = controller({
   update,
   destroy
 }, { before: [
-  { method: setUser, only: ['index', 'show'] },
-  { method: authenticate, except: ['index', 'show'] },
+  // { method: setUser, only: ['index', 'show'] },
+  // { method: authenticate, except: ['index', 'show'] },
   { method: setModel(Product), only: ['show'] },
   { method: setModel(Product, { forUser: true }), only: ['update', 'destroy'] }
 ] })
