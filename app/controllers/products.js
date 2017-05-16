@@ -38,7 +38,9 @@ const create = (req, res, next) => {
 }
 
 const update = (req, res, next) => {
-  delete req.body._owner  // disallow owner reassignment.
+  // delete req.body._owner  // disallow owner reassignment.
+  console.log('req.body is', req.body)
+
   req.product.update(req.body.product)
     .then(() => res.sendStatus(204))
     .catch(next)
