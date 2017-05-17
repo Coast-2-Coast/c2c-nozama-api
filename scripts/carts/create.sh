@@ -1,18 +1,16 @@
 #!/bin/bash
 
-# $ EMAIL=c2c@wdi.com PASSWORD=triplets scripts/auth/sign-in.sh
-
 API="http://localhost:4741"
-URL_PATH="/sign-in"
+URL_PATH="/carts"
 
 curl "${API}${URL_PATH}" \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
+  --header "Authorization: Token token=${TOKEN}" \
   --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'"
+    "cart": {
+      "text": "'"${TEXT}"'"
     }
   }'
 

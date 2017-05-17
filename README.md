@@ -2,6 +2,8 @@
 
 # c2c-nozama-api
 
+API for Nozama site created by C2C squad.
+
 A template for starting projects with `express` as an API. Includes
 authentication and common middlewares.
 
