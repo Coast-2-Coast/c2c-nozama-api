@@ -8,7 +8,6 @@ TOKEN="YfrknlJCT/MQ2yIGOb7No1HRnGQeAGSOnQf7B0zQ728=--V8mOMFFYOuL1TVVND9wTX6U/YQH
 DATE="2017-05-06"
 ITEMS="{name: 'apple', price: 100, qty: 2},{name: 'orange', price: 200, qty: 1},{name: 'banana', price: 300, qty: 1}"
 TOTAL="600"
-PAID="false"
 
 curl "${API}${URL_PATH}" \
   --include \
@@ -20,8 +19,7 @@ curl "${API}${URL_PATH}" \
       "orderDate": "'"${DATE}"'",
       "items": "'"${ITEMS}"'",
       "total": "'"${TOTAL}"'",
-      "_owner": "'"${OWNER}"'",
-      "paid": "'"${PAID}"'"
+      "_owner": "'"${OWNER}"'"
     }
   }'
 

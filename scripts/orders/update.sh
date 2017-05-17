@@ -3,9 +3,9 @@
 API="http://localhost:4741"
 URL_PATH="/orders"
 
-ID="591cb37c38320900e80ea20b"
-TOKEN="uzdnzysMJ+6PWiFGSVMcXvdnvDwqqIb8IQBozb3jSHI=--mVwTL+xlsp5bzlIrsd0ulF+NCZMYrp0c92+LzVX+Ifg="
-PAID="true"
+ID="591cc7ad70522409a42c48ba"
+TOKEN="YfrknlJCT/MQ2yIGOb7No1HRnGQeAGSOnQf7B0zQ728=--V8mOMFFYOuL1TVVND9wTX6U/YQHVVhZUweigdSvU5Sg="
+RATING="5"
 
 curl "${API}${URL_PATH}/${ID}" \
   --include \
@@ -14,7 +14,7 @@ curl "${API}${URL_PATH}/${ID}" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "order": {
-      "paid": "'"${PAID}"'"
+      "rating": "'"${RATING}"'"
     }
   }'
 

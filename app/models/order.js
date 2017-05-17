@@ -27,9 +27,7 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   paid: {
-    type: Boolean,
-    default: false,
-    required: true
+    type: Boolean
   },
   rating: {
     type: Number
