@@ -1,28 +1,20 @@
 'use strict'
 
 const mongoose = require('mongoose')
-const product = require('./product.js')
-
-const cartProductSchema = mongoose.model('Product', product.Schema)
-console.log(cartProductSchema)
-// const productSchema = new mongoose.Schema({
-//   name: String,
-//   price: Number,
-//   quantity: Number,
-//   image: String
-// })
 
 const cartSchema = new mongoose.Schema({
-  userId: {
-    type: String,
+  products: {
+    type: Array,
+    default: [],
     required: true
   },
-  products: {
-    type: [cartProductSchema],
-    default: [] }
+  _owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true }
 },
   {
-    timestamp: true,
+    timestamps: true,
     toObject: {virtuals: true},
     toJSON: {virtuals: true}
   })
