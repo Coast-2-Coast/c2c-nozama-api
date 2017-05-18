@@ -1,6 +1,6 @@
 'use strict'
 
-const stripe = require('stripe')('pk_test_1uSrps2fqlCACMqKQyrfBwbr')
+const stripe = require('stripe')('sk_test_Z2UYtEQ82ZlrPIAnRAvniJ7f')
 
 const authenticate = require('./concerns/authenticate')
 
@@ -8,7 +8,17 @@ const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Charge = models.charge
 
+const index = (req, res, next) => {
+  Charge.find()
+    .then(examples => res.json({
+      examples: examples.map((e) =>
+        e.toJSON({ virtuals: true, user: req.user }))
+    }))
+    .catch(next)
+}
+
 const create = (req, res) => {
+  console.log(req)
   const charge = Object.assign(req.body, {
     _owner: req.user._id
   })
@@ -49,8 +59,9 @@ const chargeUserCard = function (request) {
 }
 
 module.exports = controller({
+  index,
   create
 }, { before: [
-  { method: authenticate, only: ['create'] }
+  { method: authenticate, only: ['create', 'index'] }
 ] }
 )
