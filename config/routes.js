@@ -12,6 +12,7 @@ module.exports = require('lib/wiring/routes')
 .resources('orders')
 .resources('products')
 .resources('carts')
+// .resources('charges')
 
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
@@ -19,6 +20,6 @@ module.exports = require('lib/wiring/routes')
 .delete('/sign-out/:id', 'users#signout')
 .patch('/change-password/:id', 'users#changepw')
 .resources('users', { only: ['index', 'show'] })
-.resources('charges', { only: ['create'] })
+.resources('charges', { only: ['create', 'index'] })
 
 // all routes created

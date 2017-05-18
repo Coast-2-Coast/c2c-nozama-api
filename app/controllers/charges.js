@@ -1,6 +1,6 @@
 'use strict'
 
-const stripe = require('stripe')('pk_test_1uSrps2fqlCACMqKQyrfBwbr')
+const stripe = require('stripe')('sk_test_Z2UYtEQ82ZlrPIAnRAvniJ7f')
 
 const authenticate = require('./concerns/authenticate')
 
@@ -8,7 +8,17 @@ const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Charge = models.charge
 
+const index = (req, res, next) => {
+  Charge.find()
+    .then(examples => res.json({
+      examples: examples.map((e) =>
+        e.toJSON({ virtuals: true, user: req.user }))
+    }))
+    .catch(next)
+}
+
 const create = (req, res) => {
+  console.log('req is', req)
   const charge = Object.assign(req.body, {
     _owner: req.user._id
   })
@@ -30,7 +40,8 @@ const create = (req, res) => {
 const chargeUserCard = function (request) {
   // Token is created using Stripe.js or Checkout!
   // Get the payment token submitted by the form:
-  const token = request.body.stripeToken   // Using Express
+  console.log('request.body is', request.body)
+  const token = request.body.id   // Using Express
 
   console.log('(controllers/charges.js) chargeUserCard  Token: ', token)
 
@@ -42,6 +53,7 @@ const chargeUserCard = function (request) {
     source: token
   }, function (err, charge) {
     console.error(err)
+    console.log('charge is', charge)
     // asynchronously called
   })
 
@@ -49,6 +61,7 @@ const chargeUserCard = function (request) {
 }
 
 module.exports = controller({
+  index,
   create
 }, { before: [
   { method: authenticate, only: ['create'] }
