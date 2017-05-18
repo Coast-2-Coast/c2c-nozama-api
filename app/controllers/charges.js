@@ -18,7 +18,7 @@ const index = (req, res, next) => {
 }
 
 const create = (req, res) => {
-  console.log(req)
+  console.log('req is', req)
   const charge = Object.assign(req.body, {
     _owner: req.user._id
   })
@@ -40,7 +40,8 @@ const create = (req, res) => {
 const chargeUserCard = function (request) {
   // Token is created using Stripe.js or Checkout!
   // Get the payment token submitted by the form:
-  const token = request.body.stripeToken   // Using Express
+  console.log('request.body is', request.body)
+  const token = request.body.id   // Using Express
 
   console.log('(controllers/charges.js) chargeUserCard  Token: ', token)
 
@@ -52,6 +53,7 @@ const chargeUserCard = function (request) {
     source: token
   }, function (err, charge) {
     console.error(err)
+    console.log('charge is', charge)
     // asynchronously called
   })
 
@@ -62,6 +64,6 @@ module.exports = controller({
   index,
   create
 }, { before: [
-  { method: authenticate, only: ['create', 'index'] }
+  { method: authenticate, only: ['create'] }
 ] }
 )

@@ -4,13 +4,13 @@ const mongoose = require('mongoose')
 
 const chargeSchema = new mongoose.Schema({
   stripeToken: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: 'User'
+    // required: true
   }
 }, {
   timestamps: true,
