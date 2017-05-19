@@ -13,6 +13,7 @@ module.exports = require('lib/wiring/routes')
 .resources('products')
 .resources('carts')
 // .resources('charges')
+.get('/userorders/:id', 'orders#indexUser')
 
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
