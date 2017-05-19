@@ -30,11 +30,9 @@ model code, and has a routing layer which is similar to the Rails routing DSL.
 
 -   [`express-api-template`](https://github.com/ga-wdi-boston/express-api-template)
 -   [`express-api-deployment-guide`](https://github.com/ga-wdi-boston/express-api-deployment-guide)
-- [`git-workflow-teams`](https://github.com/ga-wdi-boston/git-workflow-teams#the-ga-team-project-workflow)
--
-[`stripe-express-checkout`](https://stripe.com/docs/checkout/express)
--
-[`stripe.js reference`](https://stripe.com/docs/stripe.js)
+-   [`git-workflow-teams`](https://github.com/ga-wdi-boston/git-workflow-teams#the-ga-team-project-workflow)
+-   [`stripe-express-checkout`](https://stripe.com/docs/checkout/express)
+-   [`stripe.js reference`](https://stripe.com/docs/stripe.js)
 
 -
 ## Dependencies
