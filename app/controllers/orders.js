@@ -18,6 +18,18 @@ const index = (req, res, next) => {
     .catch(next)
 }
 
+const indexUser = (req, res, next) => {
+  console.log('inside indexUser')
+  const owner = { _owner: req.user._id }
+  console.log('owner is: ', owner)
+  Order.find(owner)
+    .then(orders => res.json({
+      orders: orders.map((e) =>
+        e.toJSON({ virtuals: true, user: req.user }))
+    }))
+    .catch(next)
+}
+
 const show = (req, res) => {
   res.json({
     order: req.order.toJSON({ virtuals: true, user: req.user })
@@ -52,6 +64,7 @@ const destroy = (req, res, next) => {
 
 module.exports = controller({
   index,
+  indexUser,
   show,
   create,
   update,
